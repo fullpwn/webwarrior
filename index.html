@@ -24,12 +24,11 @@
     const socket = io();
     
     // Listen for messages from the server
-    socket.on('tx', (message) => {
+    socket.on('call', (message) => {
       document.getElementById("tx").innerHTML = message.tx;
-    });
-    socket.on('rx', (message) => {
       document.getElementById("rx").innerHTML = message.rx
     });
+    
     socket.on('socket', (message) => {
       document.getElementById("idtext").innerHTML = message.socket;
     });

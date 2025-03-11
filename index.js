@@ -37,16 +37,15 @@ async function emitnet() {
     style: "unit",
     unit: "byte"
   });
-    io.emit('tx', { tx: tx })
-  
-  exec('head /sys/class/net/docker0/statistics/rx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    io.emit('rx', { rx: stdout })
-  }
-)}
+
+  const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
+  const rxBytes = Number(rxStr);
+  const rx = txBytes.toLocaleString("en-US", {
+    style: "unit",
+    unit: "byte"
+  });
+  io.emit('call', { tx: tx, rx: rx });
+}
 
 // Send current time every 10 secs
 setInterval(emitnet, 10);
