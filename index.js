@@ -59,7 +59,7 @@ function emitnet() {
 )}
 
 // Send current time every 10 secs
-setInterval(sendTime, 100);
+setInterval(emitnet, 100);
 // Start the server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
