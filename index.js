@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
-  const tx = (txBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+  const tx = (txBytes / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
@@ -52,7 +52,28 @@ async function emitnet() {
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
+async function emitspeed() {
+  const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  const txBytes = Number(txStr);
+  const tx = (txBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+    style: "unit",
+    unit: "gigabyte",
+    unitDisplay: "short",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 
+  const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
+  const rxBytes = Number(rxStr);
+  const rx = (rxBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+    style: "unit",
+    unit: "gigabyte",
+    unitDisplay: "short",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });;
+  io.emit('speed', { tx: tx, rx: rx });
+}
 // Send current time every 10 secs
 setInterval(emitnet, 100);
 
