@@ -52,8 +52,8 @@ async function emitnet() {
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
-const txprev = 0;
-const rxprev = 0;
+let txprev = 0;
+let rxprev = 0;
 async function emitspeed() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
@@ -78,8 +78,8 @@ async function emitspeed() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
-  const txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  const rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  let txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  let rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
