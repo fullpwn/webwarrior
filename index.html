@@ -17,7 +17,7 @@
     const socket = io();
     
     // Listen for messages from the server
-    socket.on('lunch', (message) => {
+    socket.on('tx', (message) => {
       document.getElementById("test").innerHTML = message.time;
     });
     

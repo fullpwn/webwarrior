@@ -42,12 +42,12 @@ io.on('connection', (socket) => {
   });
 });
 function sendTime() {
-  exec('date +%s.%N', (err, stdout, stderr) => {
+  exec('head /sys/class/net/docker0/statistics/tx_bytes', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
     }
-    io.emit('lunch', { time: stdout })
+    io.emit('tx', { time: stdout })
   }
 )}
 
