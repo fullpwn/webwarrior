@@ -8,7 +8,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const fs = require("fs/promises");
-
+let txprev = 0;
+let rxprev = 0;
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
@@ -52,8 +53,7 @@ async function emitnet() {
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
-let txprev = 0;
-let rxprev = 0;
+
 async function emitspeed() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
