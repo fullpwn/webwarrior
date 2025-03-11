@@ -20,9 +20,11 @@
     // Listen for messages from the server
     socket.on('tx', (message) => {
       document.getElementById("tx").innerHTML = message.tx;
+      console.log("tx")
     });
     socket.on('rx', (message) => {
-      document.getElementById("rx").innerHTML = message.rx;
+      document.getElementById("rx").innerHTML = message.rx
+      console.log("rx");
     });
     
     
