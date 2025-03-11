@@ -30,13 +30,14 @@ io.on('connection', (socket) => {
   });
 });
 function emitnet() {
-  exec('head /sys/class/net/docker0/statistics/tx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
+  const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  const txBytes = Number(txStr);
+  const tx = txBytes.toLocaleString("en-US", {
+    style: "unit",
+    unit: "byte"
+  });
     io.emit('tx', { tx: stdout })
-  })
+  
   exec('head /sys/class/net/docker0/statistics/rx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
