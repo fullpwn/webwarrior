@@ -20,21 +20,19 @@
     // Listen for messages from the server
     socket.on('tx', (message) => {
       document.getElementById("tx").innerHTML = message.tx;
-      console.log("tx")
     });
     socket.on('rx', (message) => {
       document.getElementById("rx").innerHTML = message.rx
-      console.log("rx");
     });
     
     
     // Display connection status
     socket.on('connect', () => {
-        document.getElementById("status").innerHTML = "CONNECTED.";
+        document.getElementById("status").innerHTML = "online";
     });
     
     socket.on('disconnect', () => {
-        document.getElementById("status").innerHTML = 'DISCONNECT.';
+        document.getElementById("status").innerHTML = 'offline';
     });
   </script>
 </body>
