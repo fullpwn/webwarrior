@@ -77,7 +77,7 @@ async function emitspeed() {
     maximumFractionDigits: 2
   });;
   txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
