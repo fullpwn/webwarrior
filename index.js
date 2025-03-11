@@ -37,6 +37,7 @@ async function emitnet() {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
 
@@ -46,6 +47,7 @@ async function emitnet() {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
   io.emit('call', { tx: tx, rx: rx });
