@@ -1,31 +1,48 @@
-var http = require('http'),
-    fs = require('fs'),
-    // NEVER use a Sync function except at start-up!
-    index = fs.readFileSync(__dirname + '/index.html');
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const path = require('path');
 
-// Send index.html to all requests
-var app = http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(index);
+// Initialize Express app
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Serve static files from the current directory
+app.use(express.static(__dirname));
+
+// Serve the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Socket.io server listens to our app
-var io = require('socket.io').listen(app);
-
-// Send current time to all connected clients
-function sendTime() {
-    io.emit('time', { time: new Date().toJSON() });
-}
-
-// Send current time every 10 secs
-setInterval(sendTime, 10000);
-
-// Emit welcome message on connection
-io.on('connection', function(socket) {
-    // Use socket to communicate with this particular client only, sending it it's own id
-    socket.emit('welcome', { message: 'Welcome!', id: socket.id });
-
-    socket.on('i am client', console.log);
+// Socket.IO connection handler
+io.on('connection', (socket) => {
+  console.log('A user connected:', socket.id);
+  
+  // Send a welcome message to the newly connected client
+  socket.emit('message', 'Welcome to the Socket.IO server!');
+  
+  // Broadcast to all other clients that a new user has joined
+  socket.broadcast.emit('message', `User ${socket.id} has joined`);
+  
+  // Handle chat messages
+  socket.on('chatMessage', (msg) => {
+    console.log('Message received:', msg);
+    
+    // Broadcast the message to all connected clients
+    io.emit('message', `${socket.id}: ${msg}`);
+  });
+  
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+    io.emit('message', `User ${socket.id} has disconnected`);
+  });
 });
 
-app.listen(3000);
+// Start the server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

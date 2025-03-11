@@ -1,32 +1,110 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src='/socket.io/socket.io.js'></script>
-    <script>
-        var socket = io();
-
-        socket.on('welcome', function(data) {
-            addMessage(data.message);
-
-            // Respond with a message including this clients' id sent from the server
-            socket.emit('i am client', {data: 'foo!', id: data.id});
-        });
-        socket.on('time', function(data) {
-            addMessage(data.time);
-        });
-        socket.on('error', console.error.bind(console));
-        socket.on('message', console.log.bind(console));
-
-        function addMessage(message) {
-            var text = document.createTextNode(message),
-                el = document.createElement('li'),
-                messages = document.getElementById('messages');
-
-            el.appendChild(text);
-            messages.appendChild(el);
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+    #messages li {
+      padding: 5px 10px;
+    }
+    #messages li:nth-child(odd) {
+      background: #f2f2f2;
+    }
+    #chat-form {
+      display: flex;
+    }
+    #message-input {
+      flex-grow: 1;
+      padding: 10px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-    <ul id='messages'></ul>
+  <h1>Socket.IO Chat Example</h1>
+  <ul id="messages"></ul>
+  <form id="chat-form">
+    <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Import Socket.IO client library -->
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <script>
+    // Connect to the Socket.IO server
+    const socket = io();
+    
+    // DOM elements
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const messagesList = document.getElementById('messages');
+    
+    // Display messages function
+    function addMessage(message) {
+      const li = document.createElement('li');
+      li.textContent = message;
+      messagesList.appendChild(li);
+      // Auto-scroll to the bottom
+      messagesList.scrollTop = messagesList.scrollHeight;
+    }
+    
+    // Listen for messages from the server
+    socket.on('message', (message) => {
+      addMessage(message);
+    });
+    
+    // Send message when form is submitted
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const message = messageInput.value.trim();
+      
+      if (message) {
+        // Send the message to the server
+        socket.emit('chatMessage', message);
+        
+        // Clear the input field
+        messageInput.value = '';
+        messageInput.focus();
+      }
+    });
+    
+    // Display connection status
+    socket.on('connect', () => {
+      addMessage('Connected to server');
+    });
+    
+    socket.on('disconnect', () => {
+      addMessage('Disconnected from server');
+    });
+  </script>
 </body>
 </html>
