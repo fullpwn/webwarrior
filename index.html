@@ -35,11 +35,11 @@
     
     // Display connection status
     socket.on('connect', () => {
-        document.getElementById("status").innerHTML = "online";
+        document.getElementById("status").innerHTML = "Archie";
     });
     
     socket.on('disconnect', () => {
-        document.getElementById("status").innerHTML = 'offline';
+        document.getElementById("status").innerHTML = 'Disconnected';
     });
 
   </script>
