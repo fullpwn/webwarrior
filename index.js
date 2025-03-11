@@ -82,7 +82,7 @@ async function emitspeed() {
 }
 // Send current time every 10 secs
 setInterval(emitnet, 100);
-setInterval(emitspeed, 1000);
+setInterval(emitspeed, 5000);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
