@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
     
   });
 });
-function emitnet() {
+async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
   const tx = txBytes.toLocaleString("en-US", {
