@@ -37,7 +37,7 @@ async function emitnet() {
     style: "unit",
     unit: "byte"
   });
-    io.emit('tx', { tx: stdout })
+    io.emit('tx', { tx: tx })
   
   exec('head /sys/class/net/docker0/statistics/rx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
     if (err) {
