@@ -7,7 +7,8 @@
 </head>
 <body>
   <h1 id="status">connecting...</h1>
-    <p id="test"></p>
+    <p id="tx"></p>
+    <p id="rx"></p>
 
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
@@ -18,7 +19,10 @@
     
     // Listen for messages from the server
     socket.on('tx', (message) => {
-      document.getElementById("test").innerHTML = message.time;
+      document.getElementById("tx").innerHTML = message.tx;
+    });
+    socket.on('rx', (message) => {
+      document.getElementById("rx").innerHTML = message.rx;
     });
     
     

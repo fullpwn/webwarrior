@@ -47,7 +47,7 @@ function sendTime() {
       console.error(err);
       return;
     }
-    io.emit('tx', { time: stdout })
+    io.emit('tx', { tx: stdout })
   }
 )}
 
