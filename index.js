@@ -43,7 +43,7 @@ async function emitnet() {
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = (rxBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+  const rx = (rxBytes / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
@@ -52,10 +52,14 @@ async function emitnet() {
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
+const txprev = 0;
+const rxprev = 0;
 async function emitspeed() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
-  const tx = (txBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+  const txPrevBytes = Number(txprev);
+  const txSpeed = (txBytes - txPrevBytes);
+  const tx = (txSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
@@ -65,13 +69,17 @@ async function emitspeed() {
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = (rxBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
+  const rxPrevBytes = Number(rxprev);
+  const rxSpeed = (rxBytes - rxPrevBytes);
+  const rx = (rxSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
+  const txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  const rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs

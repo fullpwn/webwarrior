@@ -27,6 +27,9 @@
     socket.on('call', (message) => {
       document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
     });
+    socket.on('speed', (message) => {
+      document.getElementById("rx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
+    });
 
     socket.on('socket', (message) => {
       document.getElementById("idtext").innerHTML = message.socket;
