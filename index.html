@@ -39,6 +39,9 @@
     });
     
     socket.on('disconnect', () => {
+        
+        document.getElementById("tx").innerHTML = ''
+        document.getElementById("idtext").innerHTML = ''
         document.getElementById("status").innerHTML = 'Disconnected';
     });
 
