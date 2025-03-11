@@ -58,7 +58,7 @@ async function emitspeed() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
   const txSpeed = (txBytes - txprev);
-  const tx = (txSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
+  const tx = (txSpeed / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "megabyte",
     unitDisplay: "short",
@@ -69,7 +69,7 @@ async function emitspeed() {
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
   const rxSpeed = (rxBytes - rxprev);
-  const rx = (rxSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
+  const rx = (rxSpeed / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
     unit: "megabyte",
     unitDisplay: "short",
