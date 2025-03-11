@@ -24,6 +24,9 @@
     socket.on('rx', (message) => {
       document.getElementById("rx").innerHTML = message.rx
     });
+    socket.on('socket', (message) => {
+      document.getElementById("status").innerHTML = "online " + message.socket;
+    });
     
     
     // Display connection status
@@ -34,6 +37,7 @@
     socket.on('disconnect', () => {
         document.getElementById("status").innerHTML = 'offline';
     });
+
   </script>
 </body>
 </html>

@@ -20,25 +20,13 @@ app.get('/', (req, res) => {
 // Socket.IO connection handler
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
+  io.emit('socket', { socket: socket.id });
   
-  // Send a welcome message to the newly connected client
-  socket.emit('message', 'Welcome to the Socket.IO server!');
-  
-  // Broadcast to all other clients that a new user has joined
-  socket.broadcast.emit('message', `User ${socket.id} has joined`);
-  
-  // Handle chat messages
-  socket.on('chatMessage', (msg) => {
-    console.log('Message received:', msg);
-    
-    // Broadcast the message to all connected clients
-    io.emit('message', `${socket.id}: ${msg}`);
-  });
   
   // Handle disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
-    io.emit('message', `User ${socket.id} has disconnected`);
+    
   });
 });
 function emitnet() {
@@ -60,6 +48,7 @@ function emitnet() {
 
 // Send current time every 10 secs
 setInterval(emitnet, 100);
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
