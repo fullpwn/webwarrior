@@ -28,7 +28,7 @@
       document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
     });
     socket.on('speed', (message) => {
-      document.getElementById("rx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
+      document.getElementById("rx").innerHTML = "↓ " + message.tx + "/s - ↑ " + message.rx + "/s";
     });
 
     socket.on('socket', (message) => {
