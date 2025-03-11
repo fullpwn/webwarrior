@@ -14,7 +14,9 @@
     font-size: 20px;
     text-align: center;
  }
-
+ #rx, #tx {
+    font-feature-settings: "tnum";
+  }
  h1
  {
     text-align: center;
