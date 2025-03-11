@@ -7,6 +7,7 @@ const { exec } = require('child_process');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+const fs = require("fs/promises");
 
 // Serve static files from the current directory
 app.use(express.static(__dirname));
