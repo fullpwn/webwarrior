@@ -60,7 +60,7 @@ async function emitspeed() {
   const txSpeed = (txBytes - txprev);
   const tx = (txSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
-    unit: "gigabyte",
+    unit: "megabyte",
     unitDisplay: "short",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -71,13 +71,13 @@ async function emitspeed() {
   const rxSpeed = (rxBytes - rxprev);
   const rx = (rxSpeed / 1024 / 1024 / 1024).toLocaleString("en-US", {
     style: "unit",
-    unit: "gigabyte",
+    unit: "megabyte",
     unitDisplay: "short",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
-  txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  txprev = txBytes
+  rxprev = rxBytes
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
