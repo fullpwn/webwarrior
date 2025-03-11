@@ -10,6 +10,7 @@ const io = socketIo(server);
 const fs = require("fs/promises");
 let txprev = 0;
 let rxprev = 0;
+console.log(txprev)
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
