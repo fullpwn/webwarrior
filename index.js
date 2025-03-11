@@ -50,8 +50,7 @@ async function emitnet() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
-  //io.emit('call', { tx: tx, rx: rx });
-  io.emit('call', { tx: "ily", rx: " cutie" });
+  io.emit('call', { tx: tx, rx: rx });
 }
 
 // Send current time every 10 secs
