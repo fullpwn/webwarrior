@@ -36,7 +36,8 @@ async function emitnet() {
   const tx = (txBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
-    unitDisplay: "short"
+    unitDisplay: "short",
+    minimumFractionDigits: 2
   });
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
@@ -44,7 +45,8 @@ async function emitnet() {
   const rx = (rxBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
     style: "unit",
     unit: "gigabyte",
-    unitDisplay: "short"
+    unitDisplay: "short",
+    minimumFractionDigits: 2
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
