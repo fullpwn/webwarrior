@@ -37,7 +37,7 @@ async function emitnet() {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
-    minimumSignificantDigits: 2
+    maximumFractionDigits: 2
   });
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
@@ -46,7 +46,7 @@ async function emitnet() {
     style: "unit",
     unit: "gigabyte",
     unitDisplay: "short",
-    minimumSignificantDigits: 2
+    maximumFractionDigits: 2
   });;
   io.emit('call', { tx: tx, rx: rx });
 }
