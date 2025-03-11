@@ -10,7 +10,6 @@ const io = socketIo(server);
 const fs = require("fs/promises");
 let txprev = 0;
 let rxprev = 0;
-console.log(txprev)
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
@@ -77,8 +76,8 @@ async function emitspeed() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });;
-  let txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  let rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
+  rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
