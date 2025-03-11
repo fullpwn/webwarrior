@@ -12,6 +12,7 @@
         </div>
       </div>
   <h1 id="status">connecting...</h1>
+  <p class="idtext" id="idtext"></p>
     <p id="tx">a</p>
     <p id="rx">a</p>
 
@@ -30,7 +31,7 @@
       document.getElementById("rx").innerHTML = message.rx
     });
     socket.on('socket', (message) => {
-      document.getElementById("status").innerHTML = "online " + message.socket;
+      document.getElementById("idtext").innerHTML = message.socket;
     });
     
     
