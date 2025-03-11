@@ -33,17 +33,19 @@ io.on('connection', (socket) => {
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
-  const tx = txBytes.toLocaleString("en-US", {
+  const tx = (txBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
     style: "unit",
-    unit: "byte"
+    unit: "gigabyte",
+    unitDisplay: "short"
   });
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = txBytes.toLocaleString("en-US", {
+  const rx = (rxBytes / 1000 / 1000 / 1000).toLocaleString("en-US", {
     style: "unit",
-    unit: "byte"
-  });
+    unit: "gigabyte",
+    unitDisplay: "short"
+  });;
   io.emit('call', { tx: tx, rx: rx });
 }
 
