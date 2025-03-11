@@ -25,10 +25,9 @@
     
     // Listen for messages from the server
     socket.on('call', (message) => {
-      document.getElementById("tx").innerHTML = message.tx;
-      document.getElementById("rx").innerHTML = message.rx
+      document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
     });
-    
+
     socket.on('socket', (message) => {
       document.getElementById("idtext").innerHTML = message.socket;
     });
