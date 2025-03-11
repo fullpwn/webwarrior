@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
   });
 });
 function sendTime() {
-  exec('head /sys/class/net/docker0/statistics/tx_bytes', (err, stdout, stderr) => {
+  exec('head /sys/class/net/docker0/statistics/tx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
