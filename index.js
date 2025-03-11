@@ -41,13 +41,20 @@ io.on('connection', (socket) => {
     io.emit('message', `User ${socket.id} has disconnected`);
   });
 });
-function sendTime() {
+function emitnet() {
   exec('head /sys/class/net/docker0/statistics/tx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
     }
     io.emit('tx', { tx: stdout })
+  })
+  exec('head /sys/class/net/docker0/statistics/rx_bytes | numfmt --to iec --format "%8.4f"', (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    io.emit('rx', { rx: stdout })
   }
 )}
 
