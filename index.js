@@ -8,6 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const fs = require("fs/promises");
+const { stdout } = require('process');
 let txprev = 0;
 let rxprev = 0;
 // Serve static files from the current directory
@@ -82,8 +83,12 @@ async function emitspeed() {
 }
 // Send current time every 10 secs
 async function emitdisk() {
-
-  io.emit('disk', { disk: "46" });
+  exec("df -h / | awk 'NR==2 {print $5}' | tr -d '%'", (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }})
+  io.emit('disk', { disk: stdout });
 }
 setInterval(emitnet, 100);
 setInterval(emitspeed, 1000);
