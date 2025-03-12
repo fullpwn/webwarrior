@@ -81,6 +81,10 @@ async function emitspeed() {
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
+async function emitdisk() {
+
+  io.emit('disk', { disk: "46" });
+}
 setInterval(emitnet, 100);
 setInterval(emitspeed, 1000);
 

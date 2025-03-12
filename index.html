@@ -11,6 +11,9 @@
   <p class="idtext" id="idtext"></p>
     <p id="tx"></p>
     <p id="rx"></p>
+    <hr>
+    <h3>Disk</h3>
+    <progress id="disk" max="100"></progress>
 
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
@@ -25,6 +28,9 @@
     });
     socket.on('speed', (message) => {
       document.getElementById("rx").innerHTML = "↓ " + message.tx + "/s - ↑ " + message.rx + "/s";
+    });
+    socket.on('disk', (message) => {
+      document.getElementById("disk").value = message.disk;
     });
 
     socket.on('socket', (message) => {
