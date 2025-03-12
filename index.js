@@ -91,6 +91,15 @@ function emitdisk() {
     io.emit('disk', { disk: stdout })
   }
 )}
+function emitcpu() {
+  exec("top -bn1 | grep \"Cpu(s)\" | awk \'{print $2 + $4}\'", (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    io.emit('cpu', { cpu: stdout })
+  }
+)}
 setInterval(emitnet, 100);
 setInterval(emitspeed, 1000);
 setInterval(emitdisk, 5000);

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket.IO Chat</title>
+  <title>Archie</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,6 +15,9 @@
     <h3>Disk</h3>
     <progress id="disk" max="100"></progress>
     <p id="usage"></p>
+    <hr>
+    <h3>CPU</h3>
+    <progress id="cpu" max="100"></progress>
 
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
@@ -31,9 +34,13 @@
       document.getElementById("rx").innerHTML = "↓ " + message.tx + "/s - ↑ " + message.rx + "/s";
     });
     socket.on('disk', (message) => {
-      console.log(message);
       document.getElementById("disk").value = message.disk;
       document.getElementById("usage").innerHTML = message.disk + "% full"
+    });
+    socket.on('cpu', (message) => {
+      console.log(message);
+      document.getElementById("cpu").value = message.cpu;
+
     });
 
     socket.on('socket', (message) => {
