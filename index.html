@@ -7,11 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="content">
-        <div class="circle">
-        </div>
-      </div>
-  <h1 id="status">connecting...</h1>
+  <h1 id="status">Loading</h1>
   <p class="idtext" id="idtext"></p>
     <p id="tx"></p>
     <p id="rx"></p>
@@ -44,7 +40,7 @@
     socket.on('disconnect', () => {
         
         document.getElementById("tx").innerHTML = ''
-        document.getElementById("idtext").innerHTML = ''
+        document.getElementById("rx").innerHTML = ''
         document.getElementById("status").innerHTML = 'Disconnected';
     });
 
