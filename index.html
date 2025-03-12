@@ -56,9 +56,9 @@
     
     socket.on('disconnect', () => {
         
-        document.getElementById("tx").innerHTML = ''
-        document.getElementById("rx").innerHTML = ''
-        document.getElementById("usage").innerHTML = ""
+        document.getElementById("tx").innerHTML = '↓ - - ↑ -'
+        document.getElementById("rx").innerHTML = '↓ -/s - ↑ -/s'
+        document.getElementById("usage").innerHTML = "-"
         document.getElementById("cpu").value = ''
         document.getElementById("disk").value = ''
         document.getElementById("status").innerHTML = 'Disconnected';
