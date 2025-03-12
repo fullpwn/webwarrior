@@ -12,12 +12,13 @@
     <p id="tx"></p>
     <p id="rx"></p>
     <hr>
+    <h3>CPU</h3>
+    <progress id="cpu" max="100"></progress>
+    <hr>
     <h3>Disk</h3>
     <progress id="disk" max="100"></progress>
     <p id="usage"></p>
-    <hr>
-    <h3>CPU</h3>
-    <progress id="cpu" max="100"></progress>
+
 
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
@@ -58,6 +59,7 @@
         document.getElementById("tx").innerHTML = ''
         document.getElementById("rx").innerHTML = ''
         document.getElementById("usage").innerHTML = ""
+        document.getElementById("cpu").value = ''
         document.getElementById("disk").value = ''
         document.getElementById("status").innerHTML = 'Disconnected';
     });
