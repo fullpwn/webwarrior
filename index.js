@@ -82,7 +82,7 @@ async function emitspeed() {
   io.emit('speed', { tx: tx, rx: rx });
 }
 // Send current time every 10 secs
-async function emitdisk() {
+function emitdisk() {
   exec("df -h / | awk 'NR==2 {print $5}' | tr -d '%'", (err, stdout, stderr) => {
     if (err) {
       console.error(err);
