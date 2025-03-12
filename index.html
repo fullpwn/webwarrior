@@ -30,6 +30,7 @@
       document.getElementById("rx").innerHTML = "↓ " + message.tx + "/s - ↑ " + message.rx + "/s";
     });
     socket.on('disk', (message) => {
+      console.log(message);
       document.getElementById("disk").value = message.disk;
     });
 
