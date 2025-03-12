@@ -93,7 +93,7 @@ function emitdisk() {
 )}
 setInterval(emitnet, 100);
 setInterval(emitspeed, 1000);
-setInterval(emitdisk, 1000);
+setInterval(emitdisk, 5000);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

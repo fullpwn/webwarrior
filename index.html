@@ -14,6 +14,7 @@
     <hr>
     <h3>Disk</h3>
     <progress id="disk" max="100"></progress>
+    <p id="usage"></p>
 
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
@@ -32,6 +33,7 @@
     socket.on('disk', (message) => {
       console.log(message);
       document.getElementById("disk").value = message.disk;
+      document.getElementById("usage").innerHTML = message.disk + "% full"
     });
 
     socket.on('socket', (message) => {
@@ -48,6 +50,8 @@
         
         document.getElementById("tx").innerHTML = ''
         document.getElementById("rx").innerHTML = ''
+        document.getElementById("usage").innerHTML = ""
+        document.getElementById("disk").value = ''
         document.getElementById("status").innerHTML = 'Disconnected';
     });
 
