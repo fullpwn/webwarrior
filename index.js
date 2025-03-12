@@ -83,7 +83,7 @@ async function emitspeed() {
 }
 // Send current time every 10 secs
 function emitdisk() {
-  exec("df -h / | awk 'NR==2 {print $5}' | tr -d '%'", (err, stdout, stderr) => {
+  exec("df -h /", (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
