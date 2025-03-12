@@ -59,8 +59,8 @@
         document.getElementById("tx").innerHTML = '↓ - - ↑ -'
         document.getElementById("rx").innerHTML = '↓ -/s - ↑ -/s'
         document.getElementById("usage").innerHTML = "-"
-        document.getElementById("cpu").value = ''
-        document.getElementById("disk").value = ''
+        document.getElementById('cpu').removeAttribute('value');
+        document.getElementById('disk').removeAttribute('value');
         document.getElementById("status").innerHTML = 'Disconnected';
     });
 
