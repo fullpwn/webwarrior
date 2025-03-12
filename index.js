@@ -83,13 +83,14 @@ async function emitspeed() {
 }
 // Send current time every 10 secs
 function emitdisk() {
-  exec("df -h /", (err, stdout, stderr) => {
+  exec("df -h / | awk \'NR==2 {print $5}\' | tr -d \'%\'", (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
-    }})
-  io.emit('disk', { disk: stdout });
-}
+    }
+    io.emit('disk', { disk: stdout })
+  }
+)}
 setInterval(emitnet, 100);
 setInterval(emitspeed, 1000);
 setInterval(emitdisk, 1000);
