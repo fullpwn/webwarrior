@@ -53,6 +53,8 @@
     });
     socket.on('status', (message) => {
       console.log(message);
+      document.getElementById("archiestatus").innerHTML = "Status: " + message.trip;
+      document.getElementById("archiecontainers").innerHTML = "Containers: " + message.trip;
     });
     
     
