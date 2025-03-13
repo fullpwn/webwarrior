@@ -103,11 +103,13 @@ function emitcpu() {
 async function emitstatus() {
   const Trip = (await fs.readFile("../testTRIP")).toString();
   const TripNmbr = Number(Trip);
-  if (TripNmbr == 0) {
-    console.log("exit a")
-  } else {
-    console.log("exit b")
-  };
+  exec("sudo docker ps -qaf \"status=running\" | wc -l", (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    io.emit('status', { trip: TripNmbr, containers: stdout });
+  })
 }
 setInterval(emitnet, 100);
 setInterval(emitcpu, 200);

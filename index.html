@@ -47,12 +47,16 @@
     socket.on('socket', (message) => {
       document.getElementById("idtext").innerHTML = message.socket;
     });
+    socket.on('status', (message) => {
+      console.log(message);
+    });
     
     
     // Display connection status
     socket.on('connect', () => {
         document.getElementById("status").innerHTML = "Archie";
     });
+    
     
     socket.on('disconnect', () => {
         
