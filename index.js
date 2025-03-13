@@ -103,7 +103,10 @@ function emitcpu() {
 async function emitstatus() {
   const Trip = (await fs.readFile("../testTRIP")).toString();
   const TripNmbr = Number(Trip);
-  console.log(TripNmbr);
+  if (TripNmbr == 0) {
+    console.log("exit a")
+  } else {
+    console.log("exit b")
   };
 setInterval(emitnet, 100);
 setInterval(emitcpu, 200);
