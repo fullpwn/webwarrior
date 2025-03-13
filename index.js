@@ -108,6 +108,7 @@ setInterval(emitnet, 100);
 setInterval(emitcpu, 200);
 setInterval(emitspeed, 1000);
 setInterval(emitdisk, 5 * 1000);
+setInterval(emitstatus, 5 * 1000);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
