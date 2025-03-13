@@ -101,7 +101,7 @@ function emitcpu() {
   }
 )}
 async function emitstatus() {
-  const Trip = (await fs.readFile("../TRIP")).toString();
+  const Trip = (await fs.readFile("../testTRIP")).toString();
   const TripNmbr = Number(Trip);
   console.log(TripNmbr);
   };
