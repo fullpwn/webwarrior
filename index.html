@@ -54,7 +54,7 @@
     socket.on('status', (message) => {
       console.log(message);
       document.getElementById("archiestatus").innerHTML = "Status: " + message.trip;
-      document.getElementById("archiecontainers").innerHTML = "Containers: " + message.trip;
+      document.getElementById("archiecontainers").innerHTML = "Containers: " + message.containers;
     });
     
     
@@ -71,6 +71,8 @@
         document.getElementById("usage").innerHTML = "-"
         document.getElementById('cpu').removeAttribute('value');
         document.getElementById('disk').removeAttribute('value');
+        document.getElementById("archiestatus").innerHTML = "Status: -"
+        document.getElementById("archiecontainers").innerHTML = "Containers: -";
         document.getElementById("status").innerHTML = 'Disconnected';
     });
 
