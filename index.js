@@ -100,6 +100,10 @@ function emitcpu() {
     io.emit('cpu', { cpu: stdout })
   }
 )}
+async function emitstatus() {
+  const Trip = (await fs.readFile("../TRIP")).toString();
+  console.log(Trip);
+  };
 setInterval(emitnet, 100);
 setInterval(emitcpu, 200);
 setInterval(emitspeed, 1000);
