@@ -7,10 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="content">
-    <div class="circle">
-    </div>
-  </div>
+
   <h1 id="status">Loading</h1>
   <p class="idtext" id="idtext"></p>
     <p id="tx">↓ - - ↑ -</p>
@@ -27,7 +24,10 @@
     <progress id="disk" max="100"></progress>
     <p id="usage">-</p>
 
-
+    <div class="content">
+      <div class="circle">
+      </div>
+    </div>
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
   
