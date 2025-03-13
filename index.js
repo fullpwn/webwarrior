@@ -108,6 +108,7 @@ async function emitstatus() {
   } else {
     console.log("exit b")
   };
+}
 setInterval(emitnet, 100);
 setInterval(emitcpu, 200);
 setInterval(emitspeed, 1000);
