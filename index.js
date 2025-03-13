@@ -108,7 +108,12 @@ async function emitstatus() {
       console.error(err);
       return;
     }
-    io.emit('status', { trip: TripNmbr, containers: stdout });
+    if (TripNmbr == 0) {
+      statusarch = "Running"
+    } else {
+      statusarch = "Tripped"
+    }
+    io.emit('status', { trip: statusarch, containers: stdout });
   })
 }
 setInterval(emitnet, 100);
