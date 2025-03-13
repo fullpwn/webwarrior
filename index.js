@@ -101,7 +101,7 @@ function emitcpu() {
   }
 )}
 async function emitstatus() {
-  const Trip = (await fs.readFile("../testTRIP")).toString();
+  const Trip = (await fs.readFile("../TRIP")).toString();
   const TripNmbr = Number(Trip);
   exec("sudo docker ps -qaf \"status=running\" | wc -l", (err, stdout, stderr) => {
     if (err) {
