@@ -134,16 +134,16 @@ padding: 10px 20px;
    height: 1px;
    background-color: transparent;
    position: absolute;
-   left: 50%;
+   left: 0%;
    margin-left: -25px;
    top: 0%;
    margin-top: -25px;
    border-radius: 50%;
-   border: 2px solid rgba(0, 0, 0, 0);
-   animation: radar 4s infinite;
-   -webkit-animation: radar 4s infinite;
-   -webkit-transition: all ease-in-out;
-   transition: all ease-in;
+   border: 10px solid rgba(0, 0, 0, 0);
+   animation: radar 2s infinite;
+   -webkit-animation: radar 2s infinite;
+   -webkit-transition: all linear;
+   transition: all linear;
  }
  
  @keyframes radar {
@@ -152,13 +152,16 @@ padding: 10px 20px;
      height: 1px;
      margin-left: -25.5px;
      margin-top: -25.5px;
-     border-color: #bbb;
+      border: 10px solid rgb(187 187 187);
+      
+      
    }
    50% {
      transition: ease-out;
+      filter: blur(5px);
    }
    80% {
-    border-color: rgba(0, 0, 0, 0);
+    
 
    }
    100% {
@@ -166,7 +169,9 @@ padding: 10px 20px;
      height: 1000px;
      margin-left: -500px;
      margin-top: -500px;
-     
+     border: 0px solid rgb(187 187 187);
+      border-color: rgba(0, 0, 0, 0);
+      
      
    }
  }
