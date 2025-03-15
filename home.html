@@ -30,7 +30,21 @@
     </div>
   <!-- Import Socket.IO client library -->
   <script src="/socket.io/socket.io.js"></script>
-  
+  <script> 
+    async function checkRegistration() {
+  if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (registration) {
+        console.log("Service worker was registered on page load")
+        btn.style.display = 'block';
+      } else {
+        location.replace("/install")
+      }
+  } else {
+      console.log("Service workers API not available");
+  }
+}
+  </script>
   <script>
     // Connect to the Socket.IO server
     const socket = io();
