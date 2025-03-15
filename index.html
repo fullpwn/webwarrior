@@ -1,85 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archie</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-
-  <h1 id="status">Loading</h1>
-  <p class="idtext" id="idtext"></p>
-    <p id="tx">↓ - - ↑ -</p>
-    <p id="rx">↓ -/s - ↑ -/s</p>
-    <hr>
-    <h3>Status</h3>
-    <p id="archiestatus">Status: -</p>
-    <p id="archiecontainers">Containers: -</p>
-    <hr>
-    <h3>CPU</h3>
-    <progress id="cpu" max="100"></progress>
-    <hr>
-    <h3>Disk</h3>
-    <progress id="disk" max="100"></progress>
-    <p id="usage">-</p>
-
-    <div class="content">
-      <div class="circle">
-      </div>
-    </div>
-  <!-- Import Socket.IO client library -->
-  <script src="/socket.io/socket.io.js"></script>
-  
-  <script>
-    // Connect to the Socket.IO server
-    const socket = io();
-    
-    // Listen for messages from the server
-    socket.on('call', (message) => {
-      document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
-    });
-    socket.on('speed', (message) => {
-      document.getElementById("rx").innerHTML = "↓ " + message.tx + "/s - ↑ " + message.rx + "/s";
-    });
-    socket.on('disk', (message) => {
-      document.getElementById("disk").value = message.disk;
-      document.getElementById("usage").innerHTML = message.disk + "% full"
-    });
-    socket.on('cpu', (message) => {
-      console.log(message);
-      document.getElementById("cpu").value = message.cpu;
-
-    });
-
-    socket.on('socket', (message) => {
-      document.getElementById("idtext").innerHTML = message.socket;
-    });
-    socket.on('status', (message) => {
-      console.log(message);
-      document.getElementById("archiestatus").innerHTML = "Status: " + message.trip;
-      document.getElementById("archiecontainers").innerHTML = "Containers: " + message.containers;
-    });
-    
-    
-    // Display connection status
-    socket.on('connect', () => {
-        document.getElementById("status").innerHTML = "Archie";
-    });
-    
-    
-    socket.on('disconnect', () => {
-        
-        document.getElementById("tx").innerHTML = '↓ - - ↑ -'
-        document.getElementById("rx").innerHTML = '↓ -/s - ↑ -/s'
-        document.getElementById("usage").innerHTML = "-"
-        document.getElementById('cpu').removeAttribute('value');
-        document.getElementById('disk').removeAttribute('value');
-        document.getElementById("archiestatus").innerHTML = "Status: -"
-        document.getElementById("archiecontainers").innerHTML = "Containers: -";
-        document.getElementById("status").innerHTML = 'Disconnected';
-    });
-
-  </script>
+    test
 </body>
 </html>
