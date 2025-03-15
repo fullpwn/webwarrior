@@ -19,6 +19,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'home.html'));
+});
 
 // Socket.IO connection handler
 io.on('connection', (socket) => {
