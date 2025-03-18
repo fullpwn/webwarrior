@@ -129,8 +129,7 @@ async function emitstatus() {
     ut_hour = ut_hour % 60;
     ut_min = ut_min % 60;
     ut_sec = ut_sec % 60;
-    ut_string = ut_hour + " Hours and " + ut_min + " minutes"
-    io.emit('status', { trip: statusarch, containers: stdout, uptime: ut_string });
+    io.emit('status', { trip: statusarch, containers: stdout, uptime_hour: ut_hour, uptime_min: ut_min});
   })
 }
 setInterval(emitnet, 100);
