@@ -62,7 +62,6 @@ checkRegistration();
       document.getElementById("usage").innerHTML = message.disk + "% full"
     });
     socket.on('cpu', (message) => {
-      console.log(message);
       document.getElementById("cpu").value = message.cpu;
 
     });

@@ -119,8 +119,18 @@ async function emitstatus() {
     }
     // get uptime
     let ut_sec = os.uptime();
-
-    io.emit('status', { trip: statusarch, containers: stdout, uptime: ut_sec });
+    let ut_min = ut_sec / 60;
+    let ut_hour = ut_min / 60;
+ 
+    ut_sec = Math.floor(ut_sec);
+    ut_min = Math.floor(ut_min);
+    ut_hour = Math.floor(ut_hour);
+ 
+    ut_hour = ut_hour % 60;
+    ut_min = ut_min % 60;
+    ut_sec = ut_sec % 60;
+    ut_string = ut_hour + " Hours and " + ut_min + " minutes"
+    io.emit('status', { trip: statusarch, containers: stdout, uptime: ut_string });
   })
 }
 setInterval(emitnet, 100);
