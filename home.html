@@ -79,7 +79,12 @@ checkRegistration();
       } else {
         hour_string = " hours";
       }
-      document.getElementById("archieuptime").innerHTML = "Uptime: " + message.uptime_hour + hour_string + " " + message.uptime_minute + " minutes";
+      if (message.uptime_min === 1) {
+        min_string = " minute"
+      } else {
+        min_string = " minutes";
+      }
+      document.getElementById("archieuptime").innerHTML = "Uptime: " + message.uptime_hour + hour_string + " " + message.uptime_min + min_string;
     });
     
     
