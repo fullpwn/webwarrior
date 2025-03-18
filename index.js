@@ -11,6 +11,7 @@ const fs = require("fs/promises");
 const { stdout } = require('process');
 let txprev = 0;
 let rxprev = 0;
+const os = require('os');
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
@@ -116,7 +117,10 @@ async function emitstatus() {
     } else {
       statusarch = "Tripped"
     }
-    io.emit('status', { trip: statusarch, containers: stdout });
+    // get uptime
+    let ut_sec = os.uptime();
+
+    io.emit('status', { trip: statusarch, containers: stdout, uptime: ut_sec });
   })
 }
 setInterval(emitnet, 100);
