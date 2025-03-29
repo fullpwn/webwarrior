@@ -21,6 +21,9 @@
     <h3>CPU</h3>
     <progress id="cpu" max="100"></progress>
     <hr>
+    <h3>Memory</h3>
+    <progress id="mem" max="100"></progress>
+    <hr>
     <h3>Disk</h3>
     <progress id="disk" max="100"></progress>
     <p id="usage">-</p>
@@ -62,8 +65,9 @@ checkRegistration();
       document.getElementById("disk").value = message.disk;
       document.getElementById("usage").innerHTML = message.disk + "% full"
     });
-    socket.on('cpu', (message) => {
+    socket.on('hw', (message) => {
       document.getElementById("cpu").value = message.cpu;
+      document.getElementById("mem").value = message.mem;
 
     });
 

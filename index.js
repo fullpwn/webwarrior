@@ -12,6 +12,7 @@ const { stdout } = require('process');
 let txprev = 0;
 let rxprev = 0;
 const os = require('os');
+const totalmem = os.totalmem();
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
@@ -101,7 +102,10 @@ function emitcpu() {
       console.error(err);
       return;
     }
-    io.emit('cpu', { cpu: stdout })
+    freemem = os.freemem();
+    usedmem = totalmem - freemem;
+    usedmempc = (usedmem / totalmem) * 100;
+    io.emit('hw', { cpu: stdout, mem: usedmempc.toFixed(2) });
   }
 )}
 async function emitstatus() {
