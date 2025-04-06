@@ -1,4 +1,11 @@
 {
     "start_url": "/home",
-    "display": "fullscreen"
+    "display": "fullscreen",
+    "icons": [
+        {
+            "src": "Icon-Light-1024x1024.png",
+            "type": "image/png",
+            "sizes": "1024x1024"
+          }
+        ]
 }
