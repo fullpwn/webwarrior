@@ -42,8 +42,8 @@ io.on('connection', (socket) => {
 });
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  const txBytes = Number(txStr, {precision: 2});
-  const tx = byteSize(txBytes).toString();
+  const txBytes = Number(txStr);
+  const tx = byteSize(txBytes, {precision: 2}).toString();
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
