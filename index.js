@@ -43,11 +43,11 @@ io.on('connection', (socket) => {
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
-  const tx = byteSize(txBytes);
+  const tx = byteSize(txBytes).toString();
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = byteSize(rxBytes);
+  const rx = byteSize(rxBytes).toString();
   io.emit('call', { tx: tx, rx: rx });
 }
 
