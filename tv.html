@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="count.js"></script>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden
+        }
+
+        main {
+            width: 100vw;
+            height: 100vh;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            background-color: transparent;
+            font-family: system-ui,
+                -apple-system,
+                'Segoe UI',
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif,
+                'Apple Color Emoji',
+                'Segoe UI Emoji';
+            font-size: 5em;
+            font-variant-numeric: tabular-nums
+        }
+
+        #time {
+            margin: 1rem
+        }
+
+
+    </style>
+</head>
+
+<body>
+        <main>
+            <div id="time">
+                <p id="tx"></p>
+            </div>
+        </main>
+
+          <!-- Import Socket.IO client library -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Connect to the Socket.IO server
+    const socket = io();
+    
+    // Listen for messages from the server
+    socket.on('call', (message) => {
+      document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
+    });
+    </script>
+</body>
+
+</html>
