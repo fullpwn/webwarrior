@@ -24,7 +24,9 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'home.html'));
 });
-
+app.get('/tv', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tv.html'));
+});
 // Socket.IO connection handler
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
