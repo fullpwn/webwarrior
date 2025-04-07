@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "byte-size": "^9.0.1",
     "express": "^4.21.2",
     "socket.io": "^4.8.1",
     "socketio": "^1.0.0"

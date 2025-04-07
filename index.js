@@ -13,6 +13,7 @@ let txprev = 0;
 let rxprev = 0;
 const os = require('os');
 const totalmem = os.totalmem();
+const byteSize = require('byte-size')
 // Serve static files from the current directory
 app.use(express.static(__dirname));
 
@@ -42,23 +43,11 @@ io.on('connection', (socket) => {
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
-  const tx = (txBytes / 1024 / 1024 / 1024).toLocaleString("en-US", {
-    style: "unit",
-    unit: "gigabyte",
-    unitDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+  const tx = byteSize(txBytes);
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = (rxBytes / 1024 / 1024 / 1024).toLocaleString("en-US", {
-    style: "unit",
-    unit: "gigabyte",
-    unitDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });;
+  const rx = byteSize(rxBytes);
   io.emit('call', { tx: tx, rx: rx });
 }
 
@@ -66,24 +55,13 @@ async function emitspeed() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   const txBytes = Number(txStr);
   const txSpeed = (txBytes - txprev);
-  const tx = (txSpeed / 1024 / 1024).toLocaleString("en-US", {
-    style: "unit",
-    unit: "megabyte",
-    unitDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+
+  const tx = byteSize(txSpeed);
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
   const rxSpeed = (rxBytes - rxprev);
-  const rx = (rxSpeed / 1024 / 1024).toLocaleString("en-US", {
-    style: "unit",
-    unit: "megabyte",
-    unitDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });;
+  const rx = byteSize(rxSpeed);
   txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
