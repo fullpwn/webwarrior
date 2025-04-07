@@ -74,6 +74,9 @@
     socket.on('call', (message) => {
       document.getElementById("tx").innerHTML = "↓ " + message.tx + " - ↑ " + message.rx;
     });
+    socket.on('disconnect', () => {
+        document.getElementById("tx").innerHTML = "?";
+    });
     </script>
 </body>
 
