@@ -56,12 +56,12 @@ async function emitspeed() {
   const txBytes = Number(txStr);
   const txSpeed = (txBytes - txprev);
 
-  const tx = byteSize(txSpeed);
+  const tx = byteSize(txSpeed).toString();
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
   const rxSpeed = (rxBytes - rxprev);
-  const rx = byteSize(rxSpeed);
+  const rx = byteSize(rxSpeed).toString();
   txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
