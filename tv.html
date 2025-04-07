@@ -77,6 +77,9 @@
     socket.on('disconnect', () => {
         document.getElementById("tx").innerHTML = "?";
     });
+    socket.on('error', () => {
+        document.getElementById("tx").innerHTML = "?";
+    });
     </script>
 </body>
 
