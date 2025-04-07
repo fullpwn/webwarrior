@@ -42,12 +42,12 @@ io.on('connection', (socket) => {
 });
 async function emitnet() {
   const txStr = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
-  const txBytes = Number(txStr, {precision: 1});
+  const txBytes = Number(txStr, {precision: 2});
   const tx = byteSize(txBytes).toString();
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
-  const rx = byteSize(rxBytes, {precision: 1}).toString();
+  const rx = byteSize(rxBytes, {precision: 2}).toString();
   io.emit('call', { tx: tx, rx: rx });
 }
 
@@ -56,12 +56,12 @@ async function emitspeed() {
   const txBytes = Number(txStr);
   const txSpeed = (txBytes - txprev);
 
-  const tx = byteSize(txSpeed, {precision: 1}).toString();
+  const tx = byteSize(txSpeed, {precision: 2}).toString();
 
   const rxStr = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   const rxBytes = Number(rxStr);
   const rxSpeed = (rxBytes - rxprev);
-  const rx = byteSize(rxSpeed, {precision: 1}).toString();
+  const rx = byteSize(rxSpeed, {precision: 2}).toString();
   txprev = (await fs.readFile("/sys/class/net/docker0/statistics/tx_bytes")).toString();
   rxprev = (await fs.readFile("/sys/class/net/docker0/statistics/rx_bytes")).toString();
   io.emit('speed', { tx: tx, rx: rx });
