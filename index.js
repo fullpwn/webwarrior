@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   });
 });
 function format(bytes) {
-  const result = byteSize(bytes);
+  const result = byteSize(bytes, {precision: 2});
   return `${parseFloat(result.value).toFixed(2)} ${result.unit}`;
 }
 
